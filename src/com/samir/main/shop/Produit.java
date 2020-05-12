@@ -68,7 +68,6 @@ public class Produit {
      * Pour consulter le descriptif et voir les detailles du produit
      */
     void voir(){
-
     }
 
     /**
@@ -77,6 +76,6 @@ public class Produit {
      * @param quantite La quantité acheté du Produit
      */
     public void acheter(Facture facture, int quantite){
-
+        facture.ajouterProduit(this,quantite);
     }
 }

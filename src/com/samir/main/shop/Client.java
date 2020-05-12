@@ -1,5 +1,7 @@
 package com.samir.main.shop;
 
+import java.util.List;
+
 /**
  * Le Client de notre magasin
  */
@@ -8,7 +10,7 @@ public class Client {
     private String name;
     private String adresse;
     private int telephone;
-    private Facture[] factures;
+    private List<Facture> factures;
 
     /**
      * Constructeur d'un Client
@@ -44,7 +46,7 @@ public class Client {
         return name;
     }
 
-    public Facture[] getFactures() {
+    public List<Facture> getFactures() {
         return factures;
     }
 

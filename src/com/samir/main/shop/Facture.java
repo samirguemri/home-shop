@@ -1,27 +1,35 @@
 package com.samir.main.shop;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 /**
  * La facture produite après l'achat de un ou plusieurs Produit
  */
 public class Facture {
-    private int numéro;
-    private Date dateAchat;
+    private int numéro = new Random().nextInt();
+    private Date dateAchat = new Date();
     private Client acheteur;
     private Map<Produit, Integer> lesProduits;
-    private Float prix;
+    private float prix = 0;
+    private boolean aEtePayer = false;
 
     /**
-     * Le Seul Constructeur d'une facture
+     * Un Constructeur d'une facture
      * @param acheteur Le client qui veut acheter des Produits
      * @param desProduits La liste des Produits à achter
      */
     public Facture(Client acheteur, Map<Produit, Integer> desProduits) {
-        dateAchat = new Date();
         this.acheteur = acheteur;
         this.lesProduits = desProduits;
+    }
+
+    /**
+     * Un Constructeur d'une facture
+     * @param acheteur Le client qui veut acheter des Produits
+     */
+    public Facture(Client acheteur) {
+        this.acheteur = acheteur;
+        this.lesProduits = new HashMap<>();
     }
 
     /**
@@ -44,16 +52,16 @@ public class Facture {
      * Retourne le prix de la facture
      * @return Le prix  de la facture
      */
-    public Float getPrix() {
+    public float getPrix() {
         return prix;
     }
 
     /**
-     * Pour payer la facture
+     * Pour payer la facture,
      */
     public void payer(){
         calculerPrix();
-
+        aEtePayer = true;
     }
 
     /**
@@ -61,14 +69,18 @@ public class Facture {
      * et initialise le prix
      */
     private void calculerPrix() {
+        for (Produit unProduit: lesProduits.keySet())
+            prix += unProduit.getPrix()*lesProduits.get(unProduit);
+
     }
 
     /**
      * Pour ajouter un nouveau Produit dans le facture
-     * @param produitaAjouter Le Produit à ajouter dans la liste
-     *                       des Produits
+     * @param produitaAjouter Le Produit à ajouter dans la liste des Produits
+     * @param quantite La quantite du produit à ajouter
      */
-    public void ajouterProduit(Produit produitaAjouter){
+    public void ajouterProduit(Produit produitaAjouter, int quantite){
+        lesProduits.put(produitaAjouter,quantite);
 
     }
 
@@ -77,7 +89,12 @@ public class Facture {
      * @param produitAModifier Le produit a modifier
      */
     public void modifierQuantiteProduit(Produit produitAModifier, int nouvelleQuantite){
-
+        for (Produit unProduit: lesProduits.keySet()){
+            if(unProduit.getReference() == produitAModifier.getReference()) {
+                lesProduits.replace(unProduit, nouvelleQuantite);
+                return;
+            }
+        }
     }
 
     /**
@@ -86,7 +103,25 @@ public class Facture {
      * @param unProduit
      */
     public void supprimerProduit(Produit unProduit){
+        lesProduits.remove(unProduit);
+    }
 
+    /**
+     * Pour Afficher la Facture : les Produits et leurs quantités respectifs, ainsi que
+     * la somme à payer.
+     */
+    public void imprimer(){
+        System.out.println("***** Facture numero : "+ numéro +" *****");
+        System.out.println(
+                "Ref Produit        | Nom Produit       | Quantité       | Prix U.        | Totale"
+        );
+        //for(Map.Entry<Produit,Integer> unCouple: lesProduits.entrySet())
+        for (Produit unProduit: lesProduits.keySet())
+            System.out.println(
+                  unProduit.getReference() + "  | " +unProduit.getNom()+ "   | "
+                    + lesProduits.get(unProduit) + "  | " + unProduit.getPrix() + "  | "
+                    + unProduit.getPrix() * lesProduits.get(unProduit)
+            );
     }
 
 }
