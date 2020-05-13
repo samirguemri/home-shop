@@ -1,4 +1,4 @@
-package com.samir.main.shop;
+package com.samir.main.shop.produit;
 
 import static org.junit.jupiter.api.Assertions.*;
 

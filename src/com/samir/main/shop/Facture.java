@@ -1,5 +1,8 @@
 package com.samir.main.shop;
 
+import com.samir.main.shop.livraison.Livraison;
+import com.samir.main.shop.produit.Produit;
+
 import java.util.*;
 
 /**
@@ -8,28 +11,19 @@ import java.util.*;
 public class Facture {
     private int numéro = new Random().nextInt();
     private Date dateAchat = new Date();
-    private Client acheteur;
-    private Map<Produit, Integer> lesProduits;
+    private Client acheteur = null;
+    private Map<Produit, Integer> lesProduits = new HashMap<>();
     private float prix = 0;
     private boolean aEtePayer = false;
-
-    /**
-     * Un Constructeur d'une facture
-     * @param acheteur Le client qui veut acheter des Produits
-     * @param desProduits La liste des Produits à achter
-     */
-    public Facture(Client acheteur, Map<Produit, Integer> desProduits) {
-        this.acheteur = acheteur;
-        this.lesProduits = desProduits;
-    }
+    private Livraison livraison;
 
     /**
      * Un Constructeur d'une facture
      * @param acheteur Le client qui veut acheter des Produits
      */
-    public Facture(Client acheteur) {
+    public Facture(Client acheteur, Livraison livraison) {
         this.acheteur = acheteur;
-        this.lesProduits = new HashMap<>();
+        this.livraison = livraison;
     }
 
     /**
@@ -60,7 +54,6 @@ public class Facture {
      * Pour payer la facture,
      */
     public void payer(){
-        calculerPrix();
         aEtePayer = true;
     }
 
@@ -71,6 +64,7 @@ public class Facture {
     private void calculerPrix() {
         for (Produit unProduit: lesProduits.keySet())
             prix += unProduit.getPrix()*lesProduits.get(unProduit);
+        prix += livraison.prix();
 
     }
 
@@ -111,6 +105,7 @@ public class Facture {
      * la somme à payer.
      */
     public void imprimer(){
+        calculerPrix();
         System.out.println("***** Facture numero : "+ numéro +" *****");
         System.out.println(
                 "Ref Produit        | Nom Produit       | Quantité       | Prix U.        | Totale"

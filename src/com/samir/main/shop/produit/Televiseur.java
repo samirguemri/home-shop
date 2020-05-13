@@ -1,4 +1,4 @@
-package com.samir.main.shop;
+package com.samir.main.shop.produit;
 
 public class Televiseur extends Produit{
     private int tailleEcran;
@@ -25,5 +25,13 @@ public class Televiseur extends Produit{
 
     public String getTypeEcran() {
         return typeEcran;
+    }
+
+    /**
+     * Pour consulter le descriptif et voir les detailles du produit
+     */
+    @Override
+    void voir() {
+
     }
 }

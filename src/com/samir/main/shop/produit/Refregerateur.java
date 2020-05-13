@@ -1,4 +1,4 @@
-package com.samir.main.shop;
+package com.samir.main.shop.produit;
 
 public class Refregerateur extends Produit{
     private int capacite;
@@ -24,5 +24,13 @@ public class Refregerateur extends Produit{
 
     public boolean isCongelateur() {
         return congelateur;
+    }
+
+    /**
+     * Pour consulter le descriptif et voir les detailles du produit
+     */
+    @Override
+    void voir() {
+
     }
 }

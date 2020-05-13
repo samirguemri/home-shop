@@ -1,9 +1,9 @@
-package com.samir.main.shop;
+package com.samir.main.shop.produit;
 
 /**
  * Un produit proposé dans le magasion
  */
-public class Produit {
+public abstract class Produit {
     private int reference;
     private String nom;
     private String descriptif;
@@ -67,15 +67,5 @@ public class Produit {
     /**
      * Pour consulter le descriptif et voir les detailles du produit
      */
-    void voir(){
-    }
-
-    /**
-     * Pour acheter le produit
-     * @param facture La Facture à laquelle le Produit doit être ajouté
-     * @param quantite La quantité acheté du Produit
-     */
-    public void acheter(Facture facture, int quantite){
-        facture.ajouterProduit(this,quantite);
-    }
+    abstract void voir();
 }
