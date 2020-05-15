@@ -50,4 +50,5 @@ public class Client {
         return factures;
     }
 
+    public String getAdresse() { return adresse;}
 }

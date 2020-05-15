@@ -5,15 +5,15 @@ public class Refregerateur extends Produit{
     private boolean congelateur;
 
     /**
-     * Constructeur d'un Produit
-     *  @param nom      Le nom du Produit
-     * @param prix     Le prix du Produit
-     * @param quantite La quantite disponibe
+     * Constructeur du Refregerateur
+     *  @param nom      Le nom du Refregerateur
+     * @param prix     Le prix du Refregerateur
+     * @param stockDisponible Le stock disponibe du Refregerateur
      * @param capacite La capasite du Refregerateur en Litre
      * @param congelateur est il congelateur
      */
-    public Refregerateur(String nom, float prix, int quantite, int capacite, boolean congelateur) {
-        super(nom, prix, quantite);
+    public Refregerateur(String nom, String descriptif, double prix, int stockDisponible, int capacite, boolean congelateur) {
+        super(nom, descriptif, prix, stockDisponible);
         this.capacite = capacite;
         this.congelateur = congelateur;
     }

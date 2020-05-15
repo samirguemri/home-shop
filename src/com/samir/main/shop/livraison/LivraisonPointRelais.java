@@ -2,6 +2,11 @@ package com.samir.main.shop.livraison;
 
 public class LivraisonPointRelais implements Livraison{
     int nbPointRelais;
+    private String mode = "livraison point relais ";
+
+    public String getMode() {
+        return mode+prix();
+    }
 
     public LivraisonPointRelais(int nbPointRelais) {
         this.nbPointRelais = nbPointRelais;

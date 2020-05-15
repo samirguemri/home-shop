@@ -2,6 +2,11 @@ package com.samir.main.shop.livraison;
 
 public class LivraisonADomicileChrono24H implements Livraison{
     String ville;
+    private String mode = "livraison à domicile chrono 24H ";
+
+    public String getMode() {
+        return mode+prix();
+    }
 
     public LivraisonADomicileChrono24H(String ville) {
         this.ville = ville;

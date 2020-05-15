@@ -1,5 +1,6 @@
 package com.samir.main.shop;
 
+import com.samir.main.shop.impression.Writer;
 import com.samir.main.shop.livraison.Livraison;
 import com.samir.main.shop.produit.Produit;
 
@@ -12,7 +13,7 @@ public class Facture {
     private int numéro = new Random().nextInt();
     private Date dateAchat = new Date();
     private Client acheteur = null;
-    private Map<Produit, Integer> lesProduits = new HashMap<>();
+    private Map<Produit, Integer> lesProduits = new HashMap<>(); // couple{ProduitAcheter,Quantite}
     private float prix = 0;
     private boolean aEtePayer = false;
     private Livraison livraison;
@@ -26,6 +27,10 @@ public class Facture {
         this.livraison = livraison;
     }
 
+    public Facture() {
+
+    }
+
     /**
      * Retourne le Client assacié à cette facture
      * @return le Client achteur de la facture
@@ -33,6 +38,8 @@ public class Facture {
     public Client getAcheteur() {
         return acheteur;
     }
+
+    public int getNumero() { return numéro; }
 
     /**
      * Retourne a Liste des Produits de la facture
@@ -60,12 +67,13 @@ public class Facture {
     /**
      * Pour calculer la somme totale des Produits de la facture
      * et initialise le prix
+     * @return
      */
-    private void calculerPrix() {
+    public float calculerTotal() {
         for (Produit unProduit: lesProduits.keySet())
             prix += unProduit.getPrix()*lesProduits.get(unProduit);
         prix += livraison.prix();
-
+        return prix;
     }
 
     /**
@@ -74,8 +82,10 @@ public class Facture {
      * @param quantite La quantite du produit à ajouter
      */
     public void ajouterProduit(Produit produitaAjouter, int quantite){
-        lesProduits.put(produitaAjouter,quantite);
-
+            if (lesProduits.containsKey(produitaAjouter))
+                lesProduits.put(produitaAjouter,lesProduits.get(produitaAjouter)+quantite);
+            else lesProduits.put(produitaAjouter,quantite);
+        produitaAjouter.modifierStock(-quantite);
     }
 
     /**
@@ -83,12 +93,7 @@ public class Facture {
      * @param produitAModifier Le produit a modifier
      */
     public void modifierQuantiteProduit(Produit produitAModifier, int nouvelleQuantite){
-        for (Produit unProduit: lesProduits.keySet()){
-            if(unProduit.getReference() == produitAModifier.getReference()) {
-                lesProduits.replace(unProduit, nouvelleQuantite);
-                return;
-            }
-        }
+        lesProduits.put(produitAModifier,nouvelleQuantite);
     }
 
     /**
@@ -104,19 +109,24 @@ public class Facture {
      * Pour Afficher la Facture : les Produits et leurs quantités respectifs, ainsi que
      * la somme à payer.
      */
-    public void imprimer(){
-        calculerPrix();
-        System.out.println("***** Facture numero : "+ numéro +" *****");
-        System.out.println(
-                "Ref Produit        | Nom Produit       | Quantité       | Prix U.        | Totale"
-        );
-        //for(Map.Entry<Produit,Integer> unCouple: lesProduits.entrySet())
+    public void imprimer(Writer writer){
+        calculerTotal();
+        writer.start();
+        writer.writeLine("HomeShop compagnie\n1 Place Charles de Gaulle, 75008 Paris\n");
+        writer.writeLine("Facture à l'attention de :\n"
+                            + acheteur.getName()+"\n"
+                                + acheteur.getAdresse()+"\n");
+        writer.writeLine("Mode de livraison : "+livraison.getMode()+"\n");
+        writer.writeLine("Produits : \n" +
+                "-----------------------------------------------------");
         for (Produit unProduit: lesProduits.keySet())
-            System.out.println(
-                  unProduit.getReference() + "  | " +unProduit.getNom()+ "   | "
-                    + lesProduits.get(unProduit) + "  | " + unProduit.getPrix() + "  | "
-                    + unProduit.getPrix() * lesProduits.get(unProduit)
+            writer.writeLine(unProduit.getNom()+" - "+unProduit.getPrix()+" - "+
+                    lesProduits.get(unProduit)+" unité(s)\n"+unProduit.getDescriptif()+"\n"
             );
+        writer.writeLine("Livraison : "+livraison.prix());
+        writer.writeLine("-----------------------------------------------------");
+        writer.writeLine("Total : "+prix);
+        writer.stop();
     }
 
 }

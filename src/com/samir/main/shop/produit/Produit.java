@@ -6,35 +6,29 @@ package com.samir.main.shop.produit;
 public abstract class Produit {
     private int reference;
     private String nom;
-    private String descriptif;
-    private float prix;
-    private int quantite;
-
-    /**
-     * Constructeur d'un Produit
-     * @param nom Le nom du Produit
-     * @param prix Le prix du Produit
-     * @param quantite La quantite disponibe
-     */
-    public Produit(String nom, float prix, int quantite) {
-        this.nom = nom;
-        this.prix = prix;
-        this.quantite = quantite;
-    }
+    private String descriptif ;
+    private double prix;
+    private int stockDiponible;
 
     /**
      * Constructeur d'un Produit
      * @param nom Le nom du Produit
      * @param descriptif Le descriptif du Produit
      * @param prix Le prix du Produit
-     * @param quantite La quantite disponibe
+     * @param stockDiponible La quantite disponibe
      */
-    public Produit(String nom, String descriptif, float prix, int quantite) {
+    public Produit(String nom, String descriptif, double prix, int stockDiponible) {
         this.nom = nom;
         this.descriptif = descriptif;
         this.prix = prix;
-        this.quantite = quantite;
+        this.stockDiponible = stockDiponible;
     }
+
+    /**
+     *
+     * @param quantiteAAjouter La quantite a ajouter dans le Stock Disponible
+     */
+    public void modifierStock(int quantiteAAjouter){  stockDiponible += quantiteAAjouter; }
 
     public String getNom() {
         return nom;
@@ -52,7 +46,7 @@ public abstract class Produit {
         this.descriptif = descriptif;
     }
 
-    public float getPrix() {
+    public double getPrix() {
         return prix;
     }
 
@@ -60,8 +54,8 @@ public abstract class Produit {
         this.prix = prix;
     }
 
-    public int getQuantite() {
-        return quantite;
+    public int getStockDiponible() {
+        return stockDiponible;
     }
 
     /**
