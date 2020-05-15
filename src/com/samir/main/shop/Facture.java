@@ -1,5 +1,6 @@
 package com.samir.main.shop;
 
+import com.samir.main.shop.impression.NoProductException;
 import com.samir.main.shop.impression.Writer;
 import com.samir.main.shop.livraison.Livraison;
 import com.samir.main.shop.produit.Produit;
@@ -110,6 +111,8 @@ public class Facture {
      * la somme à payer.
      */
     public void imprimer(Writer writer){
+        if(lesProduits.size() == 0)
+            throw new NoProductException("Pas de Produits ajoutes .. Impossible de generer la Facture !!");
         calculerTotal();
         writer.start();
         writer.writeLine("HomeShop compagnie\n1 Place Charles de Gaulle, 75008 Paris\n");

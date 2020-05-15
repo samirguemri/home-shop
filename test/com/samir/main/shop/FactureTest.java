@@ -2,6 +2,7 @@ package com.samir.main.shop;
 
 import com.samir.main.shop.impression.ConsoleWriter;
 import com.samir.main.shop.impression.FileWriter;
+import com.samir.main.shop.impression.NoProductException;
 import com.samir.main.shop.impression.Writer;
 import com.samir.main.shop.livraison.Livraison;
 import com.samir.main.shop.livraison.LivraisonADomicile;
@@ -84,5 +85,11 @@ class FactureTest {
         facture.ajouterProduit(refregerateur,1);
         facture.ajouterProduit(machineACafe,1);
         facture.imprimer(new ConsoleWriter());
+    }
+
+    @Test
+    void Given_PasDeProduitAjouteeDansFacture_When_Imprimer_Then_GenererException() {
+        Facture facture = new Facture(client,livraisonPR);
+        assertThrows(NoProductException.class,() -> {facture.imprimer(writerMock);});
     }
 }
