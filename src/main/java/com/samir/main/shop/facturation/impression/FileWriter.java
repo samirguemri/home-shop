@@ -1,6 +1,6 @@
-package com.samir.main.shop.impression;
+package com.samir.main.shop.facturation.impression;
 
-import com.samir.main.shop.Facture;
+import com.samir.main.shop.facturation.Facture;
 
 import java.io.IOException;
 import java.nio.file.Files;

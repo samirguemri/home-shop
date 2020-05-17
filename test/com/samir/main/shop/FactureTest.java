@@ -1,9 +1,10 @@
 package com.samir.main.shop;
 
-import com.samir.main.shop.impression.ConsoleWriter;
-import com.samir.main.shop.impression.FileWriter;
-import com.samir.main.shop.impression.NoProductException;
-import com.samir.main.shop.impression.Writer;
+import com.samir.main.shop.facturation.Facture;
+import com.samir.main.shop.facturation.impression.ConsoleWriter;
+import com.samir.main.shop.facturation.impression.FileWriter;
+import com.samir.main.shop.facturation.impression.NoProductException;
+import com.samir.main.shop.facturation.impression.Writer;
 import com.samir.main.shop.livraison.Livraison;
 import com.samir.main.shop.livraison.LivraisonADomicile;
 import com.samir.main.shop.livraison.LivraisonPointRelais;
@@ -12,6 +13,7 @@ import com.samir.main.shop.produit.Produit;
 import com.samir.main.shop.produit.Refregerateur;
 import com.samir.main.shop.produit.Televiseur;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -90,6 +92,6 @@ class FactureTest {
     @Test
     void Given_PasDeProduitAjouteeDansFacture_When_Imprimer_Then_GenererException() {
         Facture facture = new Facture(client,livraisonPR);
-        assertThrows(NoProductException.class,() -> {facture.imprimer(writerMock);});
+        assertThrows(NoProductException.class, () -> {facture.imprimer(writerMock);});
     }
 }

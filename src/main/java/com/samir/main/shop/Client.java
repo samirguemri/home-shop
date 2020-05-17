@@ -1,5 +1,7 @@
 package com.samir.main.shop;
 
+import com.samir.main.shop.facturation.Facture;
+
 import java.util.List;
 
 /**

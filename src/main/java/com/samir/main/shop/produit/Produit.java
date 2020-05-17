@@ -1,14 +1,22 @@
 package com.samir.main.shop.produit;
 
+import java.util.Random;
+
 /**
  * Un produit proposé dans le magasion
  */
 public abstract class Produit {
-    private int reference;
+    private int reference = new Random().nextInt();
     private String nom;
     private String descriptif ;
     private double prix;
     private int stockDiponible;
+
+    @Override
+    public String toString() {
+        return "<FONT size=\"3pt\">* "+reference+" - "+"<b>"+nom+"</b>"+" : "+prix+"<br/></FONT>" +
+                "<FONT size=\"2pt\">"+descriptif+"<br/></FONT><br/>";
+    }
 
     /**
      * Constructeur d'un Produit
@@ -28,35 +36,21 @@ public abstract class Produit {
      *
      * @param quantiteAAjouter La quantite a ajouter dans le Stock Disponible
      */
-    public void modifierStock(int quantiteAAjouter){  stockDiponible += quantiteAAjouter; }
+    public void ajouterStock(int quantiteAAjouter){  stockDiponible += quantiteAAjouter; }
 
-    public String getNom() {
-        return nom;
-    }
+    public String getNom() { return nom; }
 
-    public int getReference() {
-        return reference;
-    }
+    public int getReference() { return reference; }
 
-    public String getDescriptif() {
-        return descriptif;
-    }
+    public String getDescriptif() { return descriptif; }
 
-    public void setDescriptif(String descriptif) {
-        this.descriptif = descriptif;
-    }
+    public void setDescriptif(String descriptif) { this.descriptif = descriptif; }
 
-    public double getPrix() {
-        return prix;
-    }
+    public double getPrix() { return prix; }
 
-    public void setPrix(float prix) {
-        this.prix = prix;
-    }
+    public int getStockDiponible() { return stockDiponible; }
 
-    public int getStockDiponible() {
-        return stockDiponible;
-    }
+    public void setPrix(float prix) { this.prix = prix; }
 
     /**
      * Pour consulter le descriptif et voir les detailles du produit

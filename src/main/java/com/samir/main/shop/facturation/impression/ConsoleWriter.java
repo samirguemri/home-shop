@@ -1,4 +1,4 @@
-package com.samir.main.shop.impression;
+package com.samir.main.shop.facturation.impression;
 
 public class ConsoleWriter implements Writer {
     /**
