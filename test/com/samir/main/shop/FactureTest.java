@@ -32,7 +32,7 @@ class FactureTest {
         @Override
         public void stop() { }
     };
-
+/*
     private Client client = new Client("Juste Leblanc","19 rue Germain Pilon, Paris");
     private Produit televiseur = new Televiseur("TV Samsung UE49MU6292",
             "Smart TV LED incurvée 49\"",599.0,10,52,"LCD");
@@ -42,6 +42,7 @@ class FactureTest {
             "Philips SENSEO Quadrante, Noir - 1 ou 2 tasses",79.99,20);
     private Livraison livraisonPR = new LivraisonPointRelais(27);
     private Livraison livraisonAD = new LivraisonADomicile();
+
 
     @Test
     void Given_2ProduitAcheterAvecLivraisonADomicile_When_CalculerTotal_Then_LeBonPrixTotal() {
@@ -94,4 +95,5 @@ class FactureTest {
         Facture facture = new Facture(client,livraisonPR);
         assertThrows(NoProductException.class, () -> {facture.imprimer(writerMock);});
     }
+ */
 }

@@ -1,6 +1,7 @@
 package com.samir.main.shop.facturation.web;
 
 import com.samir.main.shop.Client;
+import com.samir.main.shop.dao.ProduitDAO;
 import com.samir.main.shop.facturation.Facture;
 import com.samir.main.shop.facturation.impression.Writer;
 import com.samir.main.shop.livraison.*;
@@ -14,12 +15,12 @@ import java.io.IOException;
 import java.util.*;
 
 public class FacturationServlet extends HttpServlet {
-    List<Produit> listeDesProduits = new ArrayList<>();
+    List<Produit> listeDesProduits = null;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        Produit televiseur = new Televiseur("TV Samsung UE49MU6292",
+        /*Produit televiseur = new Televiseur("TV Samsung UE49MU6292",
                 "Smart TV LED incurvée 49\"",599.0,10,52,"LCD");
         Produit refregerateur = new Refregerateur("BEKO TSE 1042 F",
                 "Réfrigérateur BEKO 130L - Classe A+ - blanc",189.0,8,130,true);
@@ -27,7 +28,8 @@ public class FacturationServlet extends HttpServlet {
                 "Philips SENSEO Quadrante, Noir - 1 ou 2 tasses",79.99,20);
         listeDesProduits.add(televiseur);
         listeDesProduits.add(refregerateur);
-        listeDesProduits.add(machineACafe);
+        listeDesProduits.add(machineACafe);*/
+        listeDesProduits = new ProduitDAO().getAllProducts();
 
 
     }
@@ -43,8 +45,9 @@ public class FacturationServlet extends HttpServlet {
     }
 
     private void afficherFormulaire(HttpServletResponse resp) throws IOException {
-        for (Produit unProduit: listeDesProduits)
-            resp.getWriter().println(unProduit.toString());
+        for (int i = 0; i < listeDesProduits.size(); i++) {
+            resp.getWriter().println((i+1)+" >> "+(listeDesProduits.get(i)).toString());
+        }
         String formulaire = "<form action=\"facturation\">" +
                 "<b>nom complet :</b> <input name=\"fullname\"/><br/>" +
                 "<b>adresse :</b> <input name=\"address\"/><br/><br/>" +

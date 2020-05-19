@@ -1,21 +1,24 @@
 package com.samir.main.shop.produit;
 
-public class MachineACafe extends Produit {
-    private String cafe;
+public class Imprimante extends Produit{
+    private String typeEncre;
     /**
      * Constructeur d'un Produit
      *
+     * @param reference
+     * @param type
      * @param nom            Le nom du Produit
+     * @param descriptif     Le descriptif du Produit
      * @param prix           Le prix du Produit
      * @param stockDiponible La quantite disponibe
      */
-    public MachineACafe(int reference, String type,String nom, String descriptif, double prix, int stockDiponible,
-                        String cafe) {
+    public Imprimante(int reference, String type, String nom, String descriptif, double prix,
+                      int stockDiponible, String typeEncre) {
         super(reference, type, nom, descriptif, prix, stockDiponible);
-        this.cafe = cafe;
+        this.typeEncre = typeEncre;
     }
 
-    public MachineACafe(int reference, String nom, String descriptif, double prix) {
+    public Imprimante(int reference, String nom, String descriptif, double prix) {
         super(reference, nom, descriptif, prix);
     }
 

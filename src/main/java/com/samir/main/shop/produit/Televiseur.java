@@ -13,10 +13,14 @@ public class Televiseur extends Produit{
      * @param tailleEcran LA taille de l'ecran en pouce
      * @param typeEcran Le type de l'ecran
      */
-    public Televiseur(String nom, String descriptif, double prix, int stockDisponible, int tailleEcran, String typeEcran) {
-        super(nom, descriptif, prix, stockDisponible);
+    public Televiseur(int reference, String type,String nom, String descriptif, double prix, int stockDisponible, int tailleEcran, String typeEcran) {
+        super(reference, type, nom, descriptif, prix, stockDisponible);
         this.tailleEcran = tailleEcran;
         this.typeEcran = typeEcran;
+    }
+
+    public Televiseur(int reference, String nom, String descriptif, double prix) {
+        super(reference, nom, descriptif, prix);
     }
 
     public int getTailleEcran() {
@@ -25,6 +29,12 @@ public class Televiseur extends Produit{
 
     public String getTypeEcran() {
         return typeEcran;
+    }
+
+    @Override
+    public String toString() {
+        return "<FONT size=\"3pt\">"+reference+" - "+"<b>"+nom+"</b>"+" : "+prix+"<br/></FONT>" +
+                "<FONT size=\"2pt\">"+descriptif+"<br/></FONT><br/>";
     }
 
     /**

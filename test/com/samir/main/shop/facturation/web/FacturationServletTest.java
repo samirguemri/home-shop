@@ -1,8 +1,11 @@
 package com.samir.main.shop.facturation.web;
 
+import com.samir.main.shop.dao.ProduitDAO;
+import com.samir.main.shop.produit.Produit;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,7 +36,9 @@ class FacturationServletTest {
     }
 
     @Test
-    void Given__When__Then_(){
-
+    void Given_ConnecionDB_When_AffichageFormulaire_Then_HaveGoodProductInProductList(){
+        List<Produit> listeDesProduits = new ProduitDAO().getAllProducts();
+        assertEquals(15,listeDesProduits.size());
+        assertEquals("Hotpoint",listeDesProduits.get(8).getNom());
     }
 }

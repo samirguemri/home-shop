@@ -5,18 +5,13 @@ import java.util.Random;
 /**
  * Un produit proposé dans le magasion
  */
-public abstract class Produit {
-    private int reference = new Random().nextInt();
-    private String nom;
-    private String descriptif ;
-    private double prix;
-    private int stockDiponible;
-
-    @Override
-    public String toString() {
-        return "<FONT size=\"3pt\">* "+reference+" - "+"<b>"+nom+"</b>"+" : "+prix+"<br/></FONT>" +
-                "<FONT size=\"2pt\">"+descriptif+"<br/></FONT><br/>";
-    }
+public  abstract class Produit {
+    protected int reference;
+    protected String type;
+    protected String nom;
+    protected String descriptif ;
+    protected double prix;
+    protected int stockDiponible;
 
     /**
      * Constructeur d'un Produit
@@ -25,11 +20,20 @@ public abstract class Produit {
      * @param prix Le prix du Produit
      * @param stockDiponible La quantite disponibe
      */
-    public Produit(String nom, String descriptif, double prix, int stockDiponible) {
+    public Produit(int reference, String type, String nom, String descriptif, double prix, int stockDiponible) {
+        this.reference = reference;
+        this.type = type;
         this.nom = nom;
         this.descriptif = descriptif;
         this.prix = prix;
         this.stockDiponible = stockDiponible;
+    }
+
+    public Produit(int reference, String nom, String descriptif, double prix) {
+        this.reference = reference;
+        this.nom = nom;
+        this.descriptif = descriptif;
+        this.prix = prix;
     }
 
     /**

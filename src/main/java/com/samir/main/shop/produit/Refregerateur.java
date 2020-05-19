@@ -12,10 +12,15 @@ public class Refregerateur extends Produit{
      * @param capacite La capasite du Refregerateur en Litre
      * @param congelateur est il congelateur
      */
-    public Refregerateur(String nom, String descriptif, double prix, int stockDisponible, int capacite, boolean congelateur) {
-        super(nom, descriptif, prix, stockDisponible);
+    public Refregerateur(int reference, String type, String nom, String descriptif, double prix, int stockDisponible,
+                         int capacite, boolean congelateur) {
+        super(reference, type, nom, descriptif, prix, stockDisponible);
         this.capacite = capacite;
         this.congelateur = congelateur;
+    }
+
+    public Refregerateur(int reference, String nom, String descriptif, double prix) {
+        super(reference, nom, descriptif, prix);
     }
 
     public int getCapacite() {
@@ -24,6 +29,13 @@ public class Refregerateur extends Produit{
 
     public boolean isCongelateur() {
         return congelateur;
+    }
+
+
+    @Override
+    public String toString() {
+        return "<FONT size=\"3pt\">"+reference+" - "+"<b>"+nom+"</b>"+" : "+prix+"<br/></FONT>" +
+                "<FONT size=\"2pt\">"+descriptif+"<br/></FONT><br/>";
     }
 
     /**
